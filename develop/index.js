@@ -5,7 +5,7 @@ const db = mysql.createConnection(
     {
         host: "localhost",
         user: "root",
-        password: "",
+        password: "lcdbTawts12!",
         database:"employee_db"
     },
     console.log("connected to the employee db")
@@ -40,7 +40,6 @@ function viewEmployees (answer) {
 function addEmployees (answer) {
 
 const employeeValues = [
-
     {
         type:"input",
         name:"first_name",
@@ -55,17 +54,17 @@ const employeeValues = [
     },
     {
         type:"input",
-        name:"employee_role",
-        message: "What is the employees role?"
-        
+        name:"manager",
+        message: "Who is the employees manager?" 
     },
     {
         type:"input",
-        name:"employee_manager",
-        message: "Who is their manager?"
-        
+        name:"role",
+        message: "What is the employees role?" 
     },
 ]
+    
+
     if (answer ==="ADD_EMPLOYEE") {
         inquirer.prompt(employeeValues).then(response => {
             const firstName = response.first_name;
@@ -74,6 +73,12 @@ const employeeValues = [
             const employeeManager = response.employee_manager;
      //how do I put who their manager is and tell it where to go?
      //do I make another db.query?
+     // I want one if statment that kicks off several things: to place the employees name into the
+     //employees table and to get their role title in the employee role table and whoever their manager is to 
+     //be referenced along with that existing employee
+     //when pulled the employee table should show thier id, name, role, dept, title, salary, and manager so I would have to join
+     //the tables role title from employees to role id on employees
+     //join salary and department name onto employees and then whosever id matches the manager name, that employee on there
       
         const employeeQuery = `INSERT INTO employees(first_name, last_name, role_id, manager_id) \n\ VALUES(${firstName},${lastName})`;
         //what would I put for the last two values?Since they are references
@@ -86,36 +91,67 @@ const employeeValues = [
         
     }
 
+
     function updateRole (answer) {
 
+        // Sample list of choices
+        const roleChoices = ['title', 'salary'];
+        
+        // Inquirer prompt configuration
+        const updateRoleScript = [
+        {
+          type: 'list', 
+          name: 'roleOption', 
+          message: 'Choose an option:',
+          choices: roleChoices, 
+        },
+        { 
+            type: 'input', 
+          name: 'optionValue',
+          message: 'What value would you like to set?', 
+        },
+        { 
+            type: 'input', 
+          name: 'where', 
+          message: 'Where would you like the values set?(id)', 
+        }
+    ]
+        // Prompt the user with the list of choices
+        inquirer.prompt(updateRoleScript)
+          .then((answers) => {
+            // Handle the user's choice
+            console.log('You selected:', answers.roleOption);
+            console.log(`You set the value of ${answers.roleOption} as ${answers.optionValue}`)
+            const roleQuery = `UPDATE employee_role SET ${answers.roleOption} = ${answers.optionValue} WHERE id = ${anwswers.where}`;
+            db.query(roleQuery);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+        
         const roleValues = [
             {
-                type:"input",
-                name:"role_id",
-                message: "Employee ID?"
+                type:"in",
+                name:"new_role",
+                message: "What is the employees new role?"
                 
             },
             {
                 type:"input",
-                name:"first_name",
-                message: "Employee First Name?"
+                name:"salary",
+                message: "What is the salary?"
                 
             },
-            {
-                type:"input",
-                name:"last_name",
-                message: "Employee Last Name?"
-                
-            },
+            
         ]
-            if (answer ==="ADD_EMPLOYEE") {
-                inquirer.prompt(employeeValues).then(response => {
+            if (answer ==="UPDATE_ROLE") {
+                inquirer.prompt(roleValues).then(response => {
                     const employeeId = response.employee_id;
                     const firstName = response.first_name;
                     const lastName = response.last_name;
              //I don't what to do with the response before I put it in the values part
               
-                const employeeQuery = `INSERT INTO employees(employees_id, first_name, last_name, role_id, manager_id) \n\ VALUES(${employeeId},${firstName},${lastName})`;
+               
                 db.query(employeeQuery, (err, results) => {
                     if (err) throw err;
                     console.log ("Certainly:", results);
