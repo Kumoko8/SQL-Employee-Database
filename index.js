@@ -3,7 +3,7 @@ const inquirer = require ("inquirer");
 
 const db = mysql.createConnection(
     {
-        host: "localhost",
+        host: "127.0.0.1",
         user: "root",
         password: "lcdbTawts12!",
         database:"employee_db"
@@ -64,7 +64,7 @@ const employeeValues = [
     },
 ]
     
-
+// use switch and case
     if (answer ==="ADD_EMPLOYEE") {
         inquirer.prompt(employeeValues).then(response => {
             const firstName = response.first_name;
