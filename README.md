@@ -47,6 +47,18 @@
 
  n/a
 
+ ## Screenshots
+
+![Screen Shot 2023-09-02 at 9 01 52 AM](https://github.com/Kumoko8/SQL-Employee-Database/assets/131223690/f268e73e-72b5-4104-bce0-139789214d37)
+
+![Screen Shot 2023-09-02 at 9 02 15 AM](https://github.com/Kumoko8/SQL-Employee-Database/assets/131223690/90dd7458-3f34-4608-b692-44c7c29ee83d)
+
+![Screen Shot 2023-09-02 at 9 02 39 AM](https://github.com/Kumoko8/SQL-Employee-Database/assets/131223690/ad9af912-bc4c-4a53-9ae9-8d17e8101b55)
+
+![Screen Shot 2023-09-02 at 9 03 07 AM](https://github.com/Kumoko8/SQL-Employee-Database/assets/131223690/651f5f1c-5f14-4007-a9a9-dd77ebe8d9fa)
+
+![Screen Shot 2023-09-02 at 9 03 16 AM](https://github.com/Kumoko8/SQL-Employee-Database/assets/131223690/51cd9575-a259-401f-9cb1-c7fd370a1f8a)
+
 
   ## License <a name="license"></a>
 
