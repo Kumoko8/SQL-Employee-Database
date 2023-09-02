@@ -45,7 +45,7 @@ async function init() {
 }
 function viewEmployees() {
 
-    const employeeQuery = "SELECT e.first_name AS employee_first_name, e.last_name AS employee_last_name,r.title AS employee_role,m.first_name AS manager_first_name, m.last_name AS manager_last_name FROM employees e LEFT JOIN role r ON e.role_id = r.id LEFT JOIN employees m ON e.manager_id = m.id"
+    const employeeQuery = "SELECT e.id AS id, e.first_name AS employee_first_name, e.last_name AS employee_last_name,r.title AS employee_role, r.salary AS salary, d.name AS department, m.first_name AS manager_first_name, m.last_name AS manager_last_name FROM employees e LEFT JOIN role r ON e.role_id = r.id LEFT JOIN department d ON r.department_id = d.id LEFT JOIN employees m ON e.manager_id = m.id"
 
     db.query(employeeQuery, (err, results) => {
         if (err) throw err;
@@ -80,7 +80,7 @@ async function addEmployee() {
 
 
 function viewRoles() {
-    const employeeQuery = "SELECT role.title, role.salary, department.name FROM role INNER JOIN department ON role.department_id = department.id"
+    const employeeQuery = "SELECT role.id, role.title, role.salary, department.name FROM role INNER JOIN department ON role.department_id = department.id"
     db.query(employeeQuery, (err, results) => {
         if (err) throw err;
         console.table(results);
@@ -112,7 +112,7 @@ async function updateRole() {
 
     let { roleOption, where, optionValue } = await inquirer.prompt(updateRoleValues);
 
-    const updateRoleQuery = `UPDATE role SET ${roleOption} = ${optionValue} WHERE id = ${where}`;
+    const updateRoleQuery = `UPDATE role SET ${roleOption} = "${optionValue}" WHERE id = ${where}`;
 
     db.query(updateRoleQuery, (err, results) => {
         if (err) throw err;
