@@ -12,7 +12,7 @@
 
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
-const { employeeValues, menu } = require('./prompt')
+const { employeeValues, menu, departmentValues, addRoleValues, updateRoleValues } = require('./prompt')
 const db = mysql.createConnection(
     {
         host: "127.0.0.1",
@@ -35,6 +35,9 @@ async function init() {
 
         case "View All Roles":
             return viewRoles();
+
+        case "Add Role":
+            return addRole();
 
         case "Update Role":
             return updateRole();
@@ -72,10 +75,8 @@ async function addEmployee() {
     
     manager_id = parseInt(manager_id)
     role_id = parseInt(role_id)
-    // use switch and case
-
-    //how do I put who their manager is and tell it where to go?
-    //do I make another db.query?
+    
+   
     // I want one if statment that kicks off several things: to place the employees name into the
     //employees table and to get their role title in the employee role table and whoever their manager is to 
     //be referenced along with that existing employee
@@ -91,8 +92,9 @@ async function addEmployee() {
     db.query(employeeQuery, params, (err, results) => {
         if (err) throw err;
         console.table(results);
+        console.table("\n\ \n\ \n\ \n\ \n\ \n\ \n\ \n\ Success! Press down arrow for main menu!");
     })
-    console.log("Success! Press the down arrow to go back to main menu!")
+  
     init();
 }
 
@@ -103,52 +105,54 @@ function viewRoles() {
     db.query(employeeQuery, (err, results) => {
         if (err) throw err;
         console.table(results);
+        console.table("\n\ \n\ \n\ \n\ \n\ \n\ \n\ \n\ Success! Press down arrow for main menu!");
     })
-    console.log("Success! Press the down arrow to go back to main menu!")
+    
+    init();
+}
+async function addRole () {
+
+    let { title, salary, department_id} = await inquirer.prompt(addRoleValues);
+    
+
+    const addRoleQuery = `INSERT INTO role(title, salary, department_id)VALUES(?, ?, ?)`
+    const params = [title, salary, department_id]
+        
+    
+
+    db.query(addRoleQuery, params, (err, results) => {
+        if (err) throw err;
+        console.table(results);
+        console.table("\n\ \n\ \n\ \n\ \n\ \n\ \n\ \n\ Success! Press down arrow for main menu!");
+    })
+  
     init();
 }
 
+async function updateRole() {
 
-function updateRole() {
-
-    // Sample list of choices
-    const roleChoices = ['title', 'salary'];
+    let {roleOption, where, optionValue} = await inquirer.prompt(updateRoleValues);
 
     // Inquirer prompt configuration
-    const updateRoleScript = [
-        {
-            type: 'list',
-            name: 'roleOption',
-            message: 'What information would you like to update?',
-            choices: roleChoices,
-        },
-        {
-            type: 'input',
-            name: 'where',
-            message: 'Where would you like the values set?(id of the item)'
-        },
-        {
-            type: 'input',
-            name: 'optionValue',
-            message: 'What value would you like to set there instead?',
-        },
-        
-    ]
+   
     // Prompt the user with the list of choices
-    inquirer.prompt(updateRoleScript)
-        .then((answers) => {
-            // Handle the user's choice
-            console.log('You selected:', answers.roleOption);
-            console.log(`You set the value of ${answers.roleOption} as ${answers.optionValue}`)
-            const roleQuery = `UPDATE role SET ${answers.roleOption} = '${answers.optionValue}' WHERE id = ${answers.where}`;
-            db.query(roleQuery);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-// init();
+    const updateRoleQuery = `UPDATE role SET ${roleOption} = ${optionValue} WHERE id = ${where}`;
+    
+    // const params = [roleOption, optionValue, where ]
+        
+    
 
+    db.query(updateRoleQuery, (err, results) => {
+        if (err) throw err;
+        console.table(results);
+        console.table("\n\ \n\ \n\ \n\ \n\ \n\ \n\ \n\ Success! Press down arrow for main menu!");
+    })
+  
+    init();
 }
+    
+
+
 
 function viewDepartments() {
     const employeeQuery = "SELECT * from department"
@@ -159,6 +163,26 @@ function viewDepartments() {
     console.log("\n\ \n\ ")
     init();
 }
+
+async function addDepartment () {
+
+    let { name} = await inquirer.prompt(departmentValues);
+    
+
+    const departmentQuery = `INSERT INTO department(name)VALUES(?)`
+    const params = [name]
+        
+    
+
+    db.query(departmentQuery, params, (err, results) => {
+        if (err) throw err;
+        console.table(results);
+        console.table("\n\ \n\ \n\ \n\ \n\ \n\ \n\ \n\ Success! Press down arrow for main menu!");
+    })
+  
+    init();
+}
+
 // INSERT INTO table_name (column1, column2, ...)
 // VALUES (value1, value2, ...)
 // ON DUPLICATE KEY UPDATE

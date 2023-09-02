@@ -37,12 +37,65 @@ module.exports = {
                 "View All Employees",
                 "Add Employee",
                 "View All Roles",
+                "Add Role",
                 "Update Role",
                 "View All Departments",
                 "Add Department"
                 
             ]
         }
+    ],
+    addRoleValues : [
+    
+        {
+            type: 'input',
+            name: 'title',
+            message: 'What is the title of the new role?'
+        },
+        {
+            type: 'input',
+            name: 'salary',
+            message: 'What is the salary?',
+        },
+        {
+            type: 'input',
+            name: 'department_id',
+            message: 'What is the department id?',
+        },
+        
+    ],
+    updateRoleValues : [
+        {
+            type: 'list',
+            name: 'roleOption',
+            message: 'What information would you like to update?',
+            choices: [
+                "title",
+                "salary"
+            ]
+        },
+        {
+            type: 'input',
+            name: 'where',
+            message: 'Where would you like the values set?(id of the item)'
+        },
+        {
+            type: 'input',
+            name: 'optionValue',
+            message: 'What value would you like to set there instead?',
+        },
+        
+    ],
+
+
+    departmentValues :  [
+        {
+            type:"input",
+            name:"name",
+            message: "Deparment Name?"
+            
+        }
+          
     ]
 
 
