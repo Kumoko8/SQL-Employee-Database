@@ -35,7 +35,11 @@ module.exports = {
             message:"What would you like to do?",
             choices: [
                 "View All Employees",
-                "Add Employee"
+                "Add Employee",
+                "View All Roles",
+                "Update Role",
+                "View All Departments",
+                "Add Department"
                 
             ]
         }

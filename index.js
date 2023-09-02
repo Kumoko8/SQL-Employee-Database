@@ -26,8 +26,6 @@ const db = mysql.createConnection(
 
 async function init() {
     const { choice } = await inquirer.prompt(menu)
-    console.log(choice)
-
     switch (choice) {
         case "View All Employees":
             return viewEmployees();
@@ -38,7 +36,7 @@ async function init() {
         case "View All Roles":
             return viewRoles();
 
-        case "Update/Add Role":
+        case "Update Role":
             return updateRole();
 
         case "View All Departments":
@@ -60,8 +58,11 @@ function viewEmployees() {
     db.query(employeeQuery, (err, results) => {
         if (err) throw err;
         console.table(results);
+        console.table("\n\ \n\ \n\ \n\ \n\ \n\ \n\ \n\ Success! Press down arrow for main menu!");
     })
+    
     init();
+    
 }
 
 async function addEmployee() {
@@ -91,8 +92,10 @@ async function addEmployee() {
         if (err) throw err;
         console.table(results);
     })
+    console.log("Success! Press the down arrow to go back to main menu!")
     init();
 }
+
 
 
 function viewRoles() {
@@ -101,11 +104,12 @@ function viewRoles() {
         if (err) throw err;
         console.table(results);
     })
+    console.log("Success! Press the down arrow to go back to main menu!")
     init();
 }
 
 
-function updateRole(answer) {
+function updateRole() {
 
     // Sample list of choices
     const roleChoices = ['title', 'salary'];
@@ -115,19 +119,20 @@ function updateRole(answer) {
         {
             type: 'list',
             name: 'roleOption',
-            message: 'Choose an option:',
+            message: 'What information would you like to update?',
             choices: roleChoices,
         },
         {
             type: 'input',
-            name: 'optionValue',
-            message: 'What value would you like to set?',
+            name: 'where',
+            message: 'Where would you like the values set?(id of the item)'
         },
         {
             type: 'input',
-            name: 'where',
-            message: 'Where would you like the values set?(id)',
-        }
+            name: 'optionValue',
+            message: 'What value would you like to set there instead?',
+        },
+        
     ]
     // Prompt the user with the list of choices
     inquirer.prompt(updateRoleScript)
@@ -135,42 +140,13 @@ function updateRole(answer) {
             // Handle the user's choice
             console.log('You selected:', answers.roleOption);
             console.log(`You set the value of ${answers.roleOption} as ${answers.optionValue}`)
-            const roleQuery = `UPDATE employee_role SET ${answers.roleOption} = ${answers.optionValue} WHERE id = ${anwswers.where}`;
+            const roleQuery = `UPDATE role SET ${answers.roleOption} = '${answers.optionValue}' WHERE id = ${answers.where}`;
             db.query(roleQuery);
         })
         .catch((error) => {
             console.error('Error:', error);
         });
-
-    const roleValues = [
-        {
-            type: "in",
-            name: "new_role",
-            message: "What is the employees new role?"
-
-        },
-        {
-            type: "input",
-            name: "salary",
-            message: "What is the salary?"
-
-        },
-
-    ]
-    if (answer === "UPDATE_ROLE") {
-        inquirer.prompt(roleValues).then(response => {
-            const employeeId = response.employee_id;
-            const firstName = response.first_name;
-            const lastName = response.last_name;
-            //I don't what to do with the response before I put it in the values part
-
-
-            db.query(employeeQuery, (err, results) => {
-                if (err) throw err;
-                console.log("Certainly:", results);
-            })
-        })
-    }
+// init();
 
 }
 
@@ -180,6 +156,7 @@ function viewDepartments() {
         if (err) throw err;
         console.table(results);
     })
+    console.log("\n\ \n\ ")
     init();
 }
 // INSERT INTO table_name (column1, column2, ...)
