@@ -53,7 +53,13 @@ npm start
 
   ## Usage <a name="usage"></a>
 
- <p> Use this project to view and manage your employee or any data! You can simply edit the prompt titles to show whatever data you want organized in a similar way. After installing correctly and running npm start, choose from the main menu, after selecting, follow the prompts to view, add, or edit information such as names, roles, titles, salaries, etc. into your database. Once you are done, press the down arrow to go back to the main menu to continue. You will need access to the id numbers for certain tasks such as adding a role or updating an employee which you can get from the "view" options. When you are completely done, press control + C to exit the application.</p>
+ <p> Use this project to view and manage your employee or any data! </p>
+ <p>
+  You can simply edit the prompt titles to show whatever data you want organized in a similar way. After installing correctly and running npm start, choose from the main menu, after selecting, follow the prompts to view, add, or edit information such as names, roles, titles, salaries, etc. into your database. 
+ </p>
+ <p>
+  Once you are done, press the down arrow to go back to the main menu to continue. You will need access to the id numbers for certain tasks such as adding a role or updating an employee which you can get from the "view" options. When you are completely done, press control + C to exit the application.
+ </p>
 
 
   ## Contributing <a name="contributing"></a>
