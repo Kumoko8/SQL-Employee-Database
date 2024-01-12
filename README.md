@@ -32,9 +32,11 @@
 
  <p> Be sure to have a code editor (such as VSCode or Atom), open a new terminal or project folder and run the following command to clone this project into your application: 
  </p>
+ 
  ```
   git clone https://github.com/Kumoko8/SQL-Employee-Database.git 
-  ```
+  
+ ```
  
 
 
