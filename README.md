@@ -64,7 +64,7 @@ npm start
 
   ## Contributing <a name="contributing"></a>
 
- Please contact me if you would like to contribute to this project! Thank you.
+ I am currently in the process of adding a front-end to this CLI application with Python/Django. Please contact me if you would like to contribute to this project! Thank you.
 
 
   ## Tests <a name="tests"></a>
