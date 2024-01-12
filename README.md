@@ -38,7 +38,13 @@
   
  ```
  
+<p> Then run the following commands: </p>
 
+```
+npm i
+npm start
+
+```
 
 
   
