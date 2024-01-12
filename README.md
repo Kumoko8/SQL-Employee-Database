@@ -34,7 +34,7 @@
   ```
   git clone https://github.com/Kumoko8/SQL-Employee-Database.git 
   
-  ```
+ 
 to clone this project into your application. 
 
 
