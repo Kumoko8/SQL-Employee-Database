@@ -30,7 +30,11 @@
 
   ## Installation <a name="installation"></a> 
 
- <p> Be sure to have a code editor to run this and that node is installed along with any dependencies in the package, use the run script npm start to begin the command line application in your code editor </p>
+ <p> Be sure to have a code editor (such as VSCode or Atom), open a new terminal or project folder and run the following command: git clone https://github.com/Kumoko8/SQL-Employee-Database.git to clone this project into your application. 
+ Start script:
+
+  
+ </p>
 
 
   ## Usage <a name="usage"></a>
