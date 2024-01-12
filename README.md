@@ -32,6 +32,7 @@
 
  <p> Be sure to have a code editor (such as VSCode or Atom), open a new terminal or project folder and run the following command: git clone https://github.com/Kumoko8/SQL-Employee-Database.git to clone this project into your application. 
  Start script:
+ <script src="https://gist.github.com/Kumoko8/0de705b1f9e10aef020343b9dd6a94d3.js"></script>
 
   
  </p>
